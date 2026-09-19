@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Instagram, Menu, MapPin, Phone, X } from "lucide-react";
-import { infoQuery, phoneHref } from "@/lib/menu-data";
+import { digitsOnly, infoQuery, phoneHref } from "@/lib/menu-data";
 import { OpeningStatus } from "@/components/opening-status";
 import { MobileActionBar } from "@/components/mobile-action-bar";
 
@@ -32,14 +32,14 @@ export function SiteHeader() {
       }
     >
       <div className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 py-3 md:flex md:justify-between md:py-4">
-        <div className="flex min-w-0 items-center gap-3">
+        <div className="flex min-w-0 flex-col items-start gap-1.5 md:flex-row md:items-center md:gap-3">
         <Link to="/" className="flex shrink-0 items-baseline gap-1.5" onClick={() => setOpen(false)}>
           <span className="font-display text-2xl font-semibold tracking-tight text-deep-foreground">
             Brunch
           </span>
           <span className="font-display text-2xl font-semibold text-gold">&amp; Co</span>
         </Link>
-        <OpeningStatus className="hidden max-w-56 truncate border-gold/25 bg-deep/70 text-deep-foreground lg:inline-flex" />
+        <OpeningStatus className="max-w-64 truncate border-gold/25 bg-deep/70 px-2 py-1 text-[10px] text-deep-foreground md:hidden lg:inline-flex lg:px-3 lg:py-1.5 lg:text-xs" />
         </div>
 
         <nav className="hidden items-center gap-7 md:flex">
