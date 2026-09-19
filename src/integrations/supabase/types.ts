@@ -126,9 +126,11 @@ export type Database = {
           name: string
           opening_hours: string | null
           phone: string | null
+          phone_secondary: string | null
           tagline: string | null
           updated_at: string
           whatsapp: string | null
+          whatsapp_secondary: string | null
         }
         Insert: {
           about_text?: string | null
@@ -143,9 +145,11 @@ export type Database = {
           name?: string
           opening_hours?: string | null
           phone?: string | null
+          phone_secondary?: string | null
           tagline?: string | null
           updated_at?: string
           whatsapp?: string | null
+          whatsapp_secondary?: string | null
         }
         Update: {
           about_text?: string | null
@@ -160,9 +164,11 @@ export type Database = {
           name?: string
           opening_hours?: string | null
           phone?: string | null
+          phone_secondary?: string | null
           tagline?: string | null
           updated_at?: string
           whatsapp?: string | null
+          whatsapp_secondary?: string | null
         }
         Relationships: []
       }
