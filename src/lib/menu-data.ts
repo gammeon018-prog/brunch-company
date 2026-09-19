@@ -107,6 +107,25 @@ export function digitsOnly(value: string | null | undefined) {
   return (value ?? "").replace(/[^\d+]/g, "");
 }
 
+export function phoneHref(value: string | null | undefined) {
+  return `tel:${digitsOnly(value)}`;
+}
+
+export function internationalPhone(value: string | null | undefined) {
+  const digits = digitsOnly(value).replace("+", "");
+  return digits.startsWith("0") ? `213${digits.slice(1)}` : digits;
+}
+
+export function whatsappHref(value: string | null | undefined) {
+  const message = "Bonjour Brunch & Co, je souhaite réserver une table / passer une commande.";
+  return `https://wa.me/${internationalPhone(value)}?text=${encodeURIComponent(message)}`;
+}
+
+export function directionsUrl(address: string | null | undefined) {
+  const destination = address || "Brunch & Co, Rue Said Ouzeffoune, Tizi Ouzou";
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`;
+}
+
 const BUCKET = "menu-images";
 const TEN_YEARS = 60 * 60 * 24 * 365 * 10;
 

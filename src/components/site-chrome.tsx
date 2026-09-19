@@ -2,7 +2,9 @@ import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Instagram, Menu, MapPin, Phone, X } from "lucide-react";
-import { digitsOnly, infoQuery } from "@/lib/menu-data";
+import { digitsOnly, infoQuery, phoneHref } from "@/lib/menu-data";
+import { OpeningStatus } from "@/components/opening-status";
+import { MobileActionBar } from "@/components/mobile-action-bar";
 
 const NAV = [
   { label: "Accueil", to: "/" as const },
@@ -29,13 +31,16 @@ export function SiteHeader() {
         (scrolled || open ? "bg-deep/95 backdrop-blur-md shadow-lg" : "bg-transparent")
       }
     >
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
-        <Link to="/" className="flex items-baseline gap-1.5" onClick={() => setOpen(false)}>
+      <div className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 py-3 md:flex md:justify-between md:py-4">
+        <div className="flex min-w-0 flex-col items-start gap-1.5 md:flex-row md:items-center md:gap-3">
+        <Link to="/" className="flex shrink-0 items-baseline gap-1.5" onClick={() => setOpen(false)}>
           <span className="font-display text-2xl font-semibold tracking-tight text-deep-foreground">
             Brunch
           </span>
           <span className="font-display text-2xl font-semibold text-gold">&amp; Co</span>
         </Link>
+        <OpeningStatus className="max-w-64 truncate border-gold/25 bg-deep/70 px-2 py-1 text-[10px] text-deep-foreground md:hidden lg:inline-flex lg:px-3 lg:py-1.5 lg:text-xs" />
+        </div>
 
         <nav className="hidden items-center gap-7 md:flex">
           {NAV.map((item) => (
@@ -83,7 +88,8 @@ export function SiteFooter() {
   const { data: info } = useQuery(infoQuery);
 
   return (
-    <footer className="bg-deep px-5 py-10 text-center text-deep-foreground">
+    <>
+    <footer className="bg-deep px-5 pb-28 pt-10 text-center text-deep-foreground md:pb-10">
       <p className="font-display text-2xl">
         Brunch <span className="text-gold">&amp; Co</span>
       </p>
@@ -98,7 +104,7 @@ export function SiteFooter() {
           </span>
         ) : null}
         {info?.phone ? (
-          <a href={`tel:${digitsOnly(info.phone)}`} className="flex items-center gap-1.5 hover:text-gold">
+          <a href={phoneHref(info.phone)} className="flex items-center gap-1.5 hover:text-gold">
             <Phone className="size-3.5 text-gold" />
             {info.phone}
           </a>
@@ -130,5 +136,7 @@ export function SiteFooter() {
         </Link>
       </div>
     </footer>
+    <MobileActionBar />
+    </>
   );
 }
