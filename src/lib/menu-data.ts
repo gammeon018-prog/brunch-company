@@ -29,7 +29,9 @@ export type RestaurantInfo = {
   hero_subtitle: string | null;
   about_text: string | null;
   phone: string | null;
+  phone_secondary: string | null;
   whatsapp: string | null;
+  whatsapp_secondary: string | null;
   instagram: string | null;
   facebook: string | null;
   address: string | null;

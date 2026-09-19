@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Instagram, Menu, MapPin, Phone, X } from "lucide-react";
+import { digitsOnly, infoQuery } from "@/lib/menu-data";
 
 const NAV = [
   { label: "Accueil", to: "/" as const },
@@ -78,6 +80,8 @@ export function SiteHeader() {
 }
 
 export function SiteFooter() {
+  const { data: info } = useQuery(infoQuery);
+
   return (
     <footer className="bg-deep px-5 py-10 text-center text-deep-foreground">
       <p className="font-display text-2xl">
@@ -86,6 +90,31 @@ export function SiteFooter() {
       <p className="mt-2 text-xs uppercase tracking-[0.25em] text-deep-foreground/60">
         Brunch · Café · Pâtisseries
       </p>
+      <div className="mx-auto mt-5 flex max-w-2xl flex-col items-center gap-2 text-sm text-deep-foreground/75 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-5">
+        {info?.address ? (
+          <span className="flex items-center gap-1.5">
+            <MapPin className="size-3.5 text-gold" />
+            {info.address}
+          </span>
+        ) : null}
+        {info?.phone ? (
+          <a href={`tel:${digitsOnly(info.phone)}`} className="flex items-center gap-1.5 hover:text-gold">
+            <Phone className="size-3.5 text-gold" />
+            {info.phone}
+          </a>
+        ) : null}
+        {info?.phone_secondary ? (
+          <a href={`tel:${digitsOnly(info.phone_secondary)}`} className="hover:text-gold">
+            {info.phone_secondary}
+          </a>
+        ) : null}
+        {info?.instagram ? (
+          <a href={info.instagram} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:text-gold">
+            <Instagram className="size-3.5 text-gold" />
+            brunch &amp; co
+          </a>
+        ) : null}
+      </div>
       <div className="mt-6 flex flex-wrap justify-center gap-4 text-xs text-deep-foreground/70">
         <Link to="/menu" className="hover:text-gold">
           Menu

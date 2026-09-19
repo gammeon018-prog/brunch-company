@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 export function ContactBlock() {
   const { data: info } = useQuery(infoQuery);
   const whatsapp = digitsOnly(info?.whatsapp ?? info?.phone);
+  const whatsappSecondary = digitsOnly(info?.whatsapp_secondary ?? info?.phone_secondary);
 
   return (
     <div className="space-y-6">
@@ -42,7 +43,15 @@ export function ContactBlock() {
           <Button asChild>
             <a href={`tel:${digitsOnly(info.phone)}`}>
               <Phone className="size-4" />
-              Appeler
+              {info.phone}
+            </a>
+          </Button>
+        ) : null}
+        {info?.phone_secondary ? (
+          <Button asChild variant="outline">
+            <a href={`tel:${digitsOnly(info.phone_secondary)}`}>
+              <Phone className="size-4" />
+              {info.phone_secondary}
             </a>
           </Button>
         ) : null}
@@ -50,7 +59,15 @@ export function ContactBlock() {
           <Button asChild variant="secondary">
             <a href={`https://wa.me/${whatsapp.replace("+", "")}`} target="_blank" rel="noreferrer">
               <MessageCircle className="size-4" />
-              WhatsApp
+              WhatsApp {info?.whatsapp ?? info?.phone}
+            </a>
+          </Button>
+        ) : null}
+        {whatsappSecondary ? (
+          <Button asChild variant="secondary">
+            <a href={`https://wa.me/${whatsappSecondary.replace("+", "")}`} target="_blank" rel="noreferrer">
+              <MessageCircle className="size-4" />
+              WhatsApp {info?.whatsapp_secondary ?? info?.phone_secondary}
             </a>
           </Button>
         ) : null}
@@ -58,7 +75,7 @@ export function ContactBlock() {
           <Button asChild variant="outline">
             <a href={info.instagram} target="_blank" rel="noreferrer">
               <Instagram className="size-4" />
-              Instagram
+              brunch &amp; co
             </a>
           </Button>
         ) : null}
