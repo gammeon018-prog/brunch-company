@@ -1,23 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
-import { Clock, Instagram, Facebook, MapPin, Phone, MessageCircle } from "lucide-react";
-import { infoQuery, digitsOnly } from "@/lib/menu-data";
+import { Clock, Instagram, Facebook, MapPin, Phone, MessageCircle, Navigation } from "lucide-react";
+import { directionsUrl, infoQuery, phoneHref, whatsappHref } from "@/lib/menu-data";
 import { Button } from "@/components/ui/button";
+import { OpeningStatus } from "@/components/opening-status";
 
 export function ContactBlock() {
   const { data: info } = useQuery(infoQuery);
-  const whatsapp = digitsOnly(info?.whatsapp ?? info?.phone);
-  const whatsappSecondary = digitsOnly(info?.whatsapp_secondary ?? info?.phone_secondary);
+  const whatsapp = info?.whatsapp ?? info?.phone;
+  const whatsappSecondary = info?.whatsapp_secondary ?? info?.phone_secondary;
 
   return (
     <div className="space-y-6">
       <div className="grid gap-3 sm:grid-cols-2">
         <InfoCard icon={<Clock className="size-4 text-gold" />} title="Horaires">
           {info?.opening_hours ? (
-            <ul className="space-y-0.5">
+            <div className="space-y-3">
+              <OpeningStatus />
+              <ul className="space-y-0.5">
               {info.opening_hours.split("\n").map((line) => (
                 <li key={line}>{line}</li>
               ))}
-            </ul>
+              </ul>
+            </div>
           ) : (
             <p>Horaires à renseigner.</p>
           )}
@@ -25,23 +29,19 @@ export function ContactBlock() {
 
         <InfoCard icon={<MapPin className="size-4 text-gold" />} title="Adresse">
           <p>{info?.address || "Adresse à renseigner."}</p>
-          {info?.maps_link ? (
-            <a
-              href={info.maps_link}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-2 inline-block text-primary underline-offset-4 hover:underline"
-            >
-              Ouvrir dans Google Maps
+          <Button asChild size="sm" className="mt-3">
+            <a href={directionsUrl(info?.address)} target="_blank" rel="noreferrer">
+              <Navigation className="size-4" />
+              Calculer mon itinéraire
             </a>
-          ) : null}
+          </Button>
         </InfoCard>
       </div>
 
       <div className="flex flex-wrap gap-2.5">
         {info?.phone ? (
           <Button asChild>
-            <a href={`tel:${digitsOnly(info.phone)}`}>
+            <a href={phoneHref(info.phone)}>
               <Phone className="size-4" />
               {info.phone}
             </a>
@@ -49,7 +49,7 @@ export function ContactBlock() {
         ) : null}
         {info?.phone_secondary ? (
           <Button asChild variant="outline">
-            <a href={`tel:${digitsOnly(info.phone_secondary)}`}>
+            <a href={phoneHref(info.phone_secondary)}>
               <Phone className="size-4" />
               {info.phone_secondary}
             </a>
@@ -57,7 +57,7 @@ export function ContactBlock() {
         ) : null}
         {whatsapp ? (
           <Button asChild variant="secondary">
-            <a href={`https://wa.me/${whatsapp.replace("+", "")}`} target="_blank" rel="noreferrer">
+            <a href={whatsappHref(whatsapp)} target="_blank" rel="noreferrer">
               <MessageCircle className="size-4" />
               WhatsApp {info?.whatsapp ?? info?.phone}
             </a>
@@ -65,7 +65,7 @@ export function ContactBlock() {
         ) : null}
         {whatsappSecondary ? (
           <Button asChild variant="secondary">
-            <a href={`https://wa.me/${whatsappSecondary.replace("+", "")}`} target="_blank" rel="noreferrer">
+            <a href={whatsappHref(whatsappSecondary)} target="_blank" rel="noreferrer">
               <MessageCircle className="size-4" />
               WhatsApp {info?.whatsapp_secondary ?? info?.phone_secondary}
             </a>
