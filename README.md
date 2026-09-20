@@ -1,8 +1,8 @@
 # Brunch & Co Menu
 
-Implement the requested scope now; use internal planning and do not present another implementation plan for user approval. Enable Lovable Cloud for the database, auth, and storage.
+Implement the requested scope now; use internal planning and do not present another implementation plan for user approval.
 
-Build a premium, modern, mobile-first showcase web app and digital QR-code menu for the cafe/restaurant "Brunch & Co", including a secure admin dashboard powered by Lovable Cloud (Supabase).
+Build a premium, modern, mobile-first showcase web app and digital QR-code menu for the cafe/restaurant "Brunch & Co", including a secure admin dashboard powered by Supabase.
 
 ### Core Features & Architecture:
 
@@ -33,17 +33,9 @@ Build a premium, modern, mobile-first showcase web app and digital QR-code menu 
 
 Language of the UI: French.
 
-This project was built with [Lovable](https://lovable.dev).
+## Publication
 
-**Live app**: https://brunch-company.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/00841310-7f36-46fb-b602-dab7f2ec15a2).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+The public site is deployed automatically to [GitHub Pages](https://gammeon018-prog.github.io/brunch-company/).
 
 ## Development
 
