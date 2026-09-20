@@ -1,5 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { Clock, Instagram, Facebook, MapPin, Phone, MessageCircle, Navigation } from "lucide-react";
+import {
+  Clock,
+  Instagram,
+  Facebook,
+  MapPin,
+  Phone,
+  MessageCircle,
+  Navigation,
+  Globe,
+} from "lucide-react";
 import { directionsUrl, infoQuery, phoneHref, whatsappHref } from "@/lib/menu-data";
 import { Button } from "@/components/ui/button";
 import { OpeningStatus } from "@/components/opening-status";
@@ -17,9 +26,9 @@ export function ContactBlock() {
             <div className="space-y-3">
               <OpeningStatus />
               <ul className="space-y-0.5">
-              {info.opening_hours.split("\n").map((line) => (
-                <li key={line}>{line}</li>
-              ))}
+                {info.opening_hours.split("\n").map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
               </ul>
             </div>
           ) : (
@@ -68,6 +77,14 @@ export function ContactBlock() {
             <a href={whatsappHref(whatsappSecondary)} target="_blank" rel="noreferrer">
               <MessageCircle className="size-4" />
               WhatsApp {info?.whatsapp_secondary ?? info?.phone_secondary}
+            </a>
+          </Button>
+        ) : null}
+        {info?.website ? (
+          <Button asChild variant="outline">
+            <a href={info.website} target="_blank" rel="noreferrer">
+              <Globe className="size-4" />
+              brunch-company
             </a>
           </Button>
         ) : null}

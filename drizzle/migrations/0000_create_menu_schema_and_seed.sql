@@ -42,20 +42,20 @@ CREATE POLICY "products_admin_delete" ON public.products FOR DELETE TO authentic
 -- RESTAURANT INFO (single row)
 CREATE TABLE public.restaurant_info (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  name text NOT NULL DEFAULT 'Brunch & Co',
-  tagline text,
-  hero_title text,
-  hero_subtitle text,
-  about_text text,
-  phone text,
-  whatsapp text,
-  instagram text,
-  facebook text,
-  address text,
-  maps_link text,
-  maps_embed text,
-  opening_hours text,
-  updated_at timestamptz NOT NULL DEFAULT now()
+   name text NOT NULL DEFAULT 'Brunch & Co',
+   tagline text,
+   hero_title text,
+   hero_subtitle text,
+   about_text text,
+   phone text,
+   whatsapp text,
+   instagram text,
+   facebook text,
+   address text,
+   maps_link text,
+   maps_embed text,
+   opening_hours text,
+   updated_at timestamptz NOT NULL DEFAULT now()
 );
 GRANT SELECT ON public.restaurant_info TO anon;
 GRANT SELECT, INSERT, UPDATE, DELETE ON public.restaurant_info TO authenticated;
@@ -277,7 +277,7 @@ FROM (VALUES
 JOIN public.categories c ON c.slug = v.cat;
 
 -- SEED RESTAURANT INFO
-INSERT INTO public.restaurant_info (name, tagline, hero_title, hero_subtitle, about_text, phone, whatsapp, instagram, facebook, address, maps_link, opening_hours)
+INSERT INTO public.restaurant_info (name, tagline, hero_title, hero_subtitle, about_text, phone, whatsapp, website, instagram, facebook, address, maps_link, opening_hours)
 VALUES (
   'Brunch & Co',
   'Brunch, café de spécialité & pâtisseries maison',
@@ -286,6 +286,7 @@ VALUES (
   'Brunch & Co est une maison de brunch où chaque assiette est préparée le jour même : toasts gourmands, croissants garnis, salades fraîches, pâtisseries et café de spécialité.',
   '',
   '',
+  'https://brunch-company.lovable.app',
   '',
   '',
   '',

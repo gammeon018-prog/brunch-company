@@ -34,6 +34,7 @@ export type RestaurantInfo = {
   whatsapp_secondary: string | null;
   instagram: string | null;
   facebook: string | null;
+  website: string | null;
   address: string | null;
   maps_link: string | null;
   maps_embed: string | null;

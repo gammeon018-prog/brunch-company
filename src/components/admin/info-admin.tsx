@@ -21,6 +21,7 @@ const FIELDS: Array<{ key: string; label: string; type?: "text" | "area" }> = [
   { key: "whatsapp_secondary", label: "Deuxième WhatsApp" },
   { key: "instagram", label: "Lien Instagram" },
   { key: "facebook", label: "Lien Facebook" },
+  { key: "website", label: "Lien du site web" },
   { key: "address", label: "Adresse" },
   { key: "maps_link", label: "Lien Google Maps" },
   { key: "maps_embed", label: "Lien de la carte intégrée (iframe src)" },
